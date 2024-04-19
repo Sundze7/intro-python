@@ -7,7 +7,7 @@ PY_MINOR=${PY_VERSION#*.}
 PY_MINOR=${PY_MINOR%.*}
 
 # Verify if a virtual env folder exists
-if [ ! -d "venv" ]; then
+if [ ! -d "myenv" ]; then
     echo "Create a python virtual environment called 'venv'"
     exit 1 
 fi 
@@ -32,7 +32,7 @@ fi
 PACKAGE_PATH=packages/python/lib/python${PY_MAJOR}.${PY_MINOR}/site-packages
 # Create the packages directory
 mkdir -p $PACKAGE_PATH
-cp -r venv/lib/python*/site-packages/* $PACKAGE_PATH
+cp -r myenv/lib/python*/site-packages/* $PACKAGE_PATH
 
 cd packages
 zip -r ../packages.zip .

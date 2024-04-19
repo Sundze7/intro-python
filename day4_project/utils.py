@@ -11,20 +11,20 @@ def get_instance(response) -> dict:
   
   """
     
-  instances = ["Reservations"][0]["Instances"]
+  instances = response["Reservations"][0]["Instances"]
   instance = instances[0]
   return instance
   
   
-  def get_instance_tags():
-    """Extracts all tags from an AWS instance
+def get_instance_tags(instance):
+  """Extracts all tags from an AWS instance
     
-    Args:
+  Args:
       instance (dict): Json data containing instance infor
         
-    Returns
+  Returns
       list: List of instance tags     
-    """
+  """
       
   return instance["Tags"]
 
@@ -61,6 +61,6 @@ def send_sns_notification(instance_id, tags_to_create) -> None:
     Regards
     AWS Policia
   """
-  topic_arn = ""
+  topic_arn = "arn:aws:sns:ca-central-1:828804287617:aws-policia"
   sns_client = boto3.client('sns')
-  sns_client.publish(Subject=subject, Message=message, Topic=topic_arn)
+  sns_client.publish(Subject=subject, Message=message, TopicArn=topic_arn)
